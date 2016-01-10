@@ -1,4 +1,6 @@
 <resources>
-    <string name="app_name">My First App</string>
+    <string name="app_name">Customized Customization</string>
     <string name="action_settings">Settings</string>
+    <string name="greetingsStr">I am the king of the world</string>
+    <string name="sendQuote">Cookies are delicious</string>
 </resources>
