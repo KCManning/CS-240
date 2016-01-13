@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">InventoryProject</string>
     <string name="action_settings">Settings</string>
-</resources>
+    <string name="lblItemDetailsStr">Item Details</string>
+    <string name="lblItemTypeStr">Item Type</string>
+    <string name="lblItemCostStr">Item Cost</string>
+    <string name="lblItemQuantityStr">Item Quantity</string>
+    <string name="lblTypeStr">Type:</string>
+    <string name="lblCostStr">Cost:</string>
+    <string name="lblQuantityStr">Quantity:</string>
+    <string name="lblActionStr">Action:</string>
+    <string name="spnItemActionsTotalStr">Get Total Cost</string>
+    <string name="spnItemActionsCostStr">Change Cost</string>
+    <string name="spnItemActionsQuantityStr">Change Quantity</string>
+    <string name="spnItemActionsDeleteStr">Delete Item</string>
+    <string name="btnPerformActionStr">Perform Action</string>
+
+    <string-array name="spnItemActionsArr">
+        <item>@string/spnItemActionsTotalStr</item>
+        <item>@string/spnItemActionsCostStr</item>
+        <item>@string/spnItemActionsQuantityStr</item>
+        <item>@string/spnItemActionsDeleteStr</item>
+    </string-array>
+        </resources>
