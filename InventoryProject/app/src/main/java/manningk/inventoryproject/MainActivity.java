@@ -33,26 +33,7 @@ public class MainActivity extends AppCompatActivity {
         txtQuantity.setText(String.valueOf(myItem.getQuantity()));
     }
 
-    public void btnActionOnClick (View view)
-    {
-        Spinner spnItemActions = (Spinner)findViewById(R.id.spnAction);
-        String option = String.valueOf(spnItemActions.getSelectedItem());
 
-        Toast.makeText(this.getApplicationContext(), option, Toast.LENGTH_LONG).show();
-
-        /*
-        String kevin1 = new String("Kevin");
-        String kevin2 = new String("Kevin");
-        if(kevin1==kevin2)
-            ^Will return false.
-
-        String kevin1 = "Kevin";
-        String kevin2 = "Kevin";
-        if(kevin1==kevin2)
-            ^Will return true.
-
-         */
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -74,5 +55,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void btnPerformActionOnClick (View view)
+    {
+        Spinner spnItemActions = (Spinner)findViewById(R.id.spnAction);
+        String option = String.valueOf(spnItemActions.getSelectedItem());
+
+        Toast.makeText(this.getApplicationContext(), option, Toast.LENGTH_LONG).show();
+
     }
 }
