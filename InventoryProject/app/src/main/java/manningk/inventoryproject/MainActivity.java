@@ -8,8 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+ Item myItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +21,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        myItem = Item.getTestItem();
+        EditText txtType = (EditText) findViewById(R.id.txtType);
+        txtType.setText(myItem.getType());
+
+        EditText txtCost = (EditText) findViewById(R.id.txtCost);
+        txtCost.setText(String.valueOf(myItem.getCost()));
+
+        EditText txtQuantity = (EditText) findViewById(R.id.txtQuantity);
+        txtQuantity.setText(String.valueOf(myItem.getQuantity()));
+    }
+
+    public void btnActionOnClick (View view)
+    {
+        Spinner spnItemActions = (Spinner)findViewById(R.id.spnAction);
+        String option = String.valueOf(spnItemActions.getSelectedItem());
+
+        Toast.makeText(this.getApplicationContext(), option, Toast.LENGTH_LONG).show();
+
+        /*
+        String kevin1 = new String("Kevin");
+        String kevin2 = new String("Kevin");
+        if(kevin1==kevin2)
+            ^Will return false.
+
+        String kevin1 = "Kevin";
+        String kevin2 = "Kevin";
+        if(kevin1==kevin2)
+            ^Will return true.
+
+         */
     }
 
     @Override

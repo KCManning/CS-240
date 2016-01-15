@@ -60,6 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtCost"
+        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:focusable="false"
         android:layout_below="@+id/txtType"
@@ -120,6 +121,7 @@
         android:id="@+id/btnPerformAction"
         android:layout_below="@+id/spnAction"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="113dp" />
+        android:layout_marginTop="113dp"
+        android:clickable="true" />
 
 </RelativeLayout>

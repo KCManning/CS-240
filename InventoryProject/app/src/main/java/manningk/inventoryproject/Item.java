@@ -50,7 +50,7 @@ public class Item
         this.cost = cost;
     }
 
-    public Item getTestItem()
+    public static Item getTestItem()
     {
         Item i = new Item("Widget123", 12.95, 123);
         return i;
