@@ -12,20 +12,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Stats"
-        android:id="@+id/btnStatsScreen"
+        android:text="Go Home"
+        android:id="@+id/btnStatsCancel"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="btnStatsScreenOnClick" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Build Deck"
-        android:id="@+id/btnBuildScreen"
-        android:layout_alignBottom="@+id/btnStatsScreen"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="btnBuildScreenOnClick" />
+        android:onClick="btnsCancelOnClick" />
 </RelativeLayout>
