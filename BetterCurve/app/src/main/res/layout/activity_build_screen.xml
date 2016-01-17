@@ -36,4 +36,61 @@
         android:layout_alignTop="@+id/btnSave"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:id="@+id/btnAddCard"
+        android:layout_below="@+id/lblName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:id="@+id/btnLower"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/btnDeckCancel"
+        android:layout_alignEnd="@+id/btnDeckCancel" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:id="@+id/btnRaise"
+        android:layout_alignBottom="@+id/btnLower"
+        android:layout_toLeftOf="@+id/btnLower"
+        android:layout_toStartOf="@+id/btnLower" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Qty"
+        android:id="@+id/lblQty"
+        android:layout_alignBottom="@+id/btnRaise"
+        android:layout_toLeftOf="@+id/btnRaise"
+        android:layout_toStartOf="@+id/btnRaise" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cost"
+        android:id="@+id/lblCardCost"
+        android:layout_alignBottom="@+id/lblQty"
+        android:layout_alignRight="@+id/btnLoad"
+        android:layout_alignEnd="@+id/btnLoad" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Card Name"
+        android:id="@+id/lblName"
+        android:layout_alignBottom="@+id/lblCardCost"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
