@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Better Curve</string>
-    <string name="title_GUIControls">GUI Controls</string>
+    <string name="title_DeckStats">Deck Curve</string>
+    <string name="title_BuildDeck">Build a Deck</string>
 </resources>

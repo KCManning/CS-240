@@ -16,8 +16,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GUIControls"
-            android:label="@string/title_GUIControls"
+            android:name=".DeckStats"
+            android:label="@string/title_DeckStats"
+            android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".BuildDeck"
+            android:label="@string/title_BuildDeck"
             android:theme="@style/AppTheme">
 
         </activity>
