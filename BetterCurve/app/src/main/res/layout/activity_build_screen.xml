@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:text="+"
         android:id="@+id/btnAddCard"
-        android:layout_below="@+id/lblName"
+        android:layout_below="@+id/btnRaise"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -66,31 +66,36 @@
         android:layout_toLeftOf="@+id/btnLower"
         android:layout_toStartOf="@+id/btnLower" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Qty"
-        android:id="@+id/lblQty"
+        android:id="@+id/txtQty"
         android:layout_alignBottom="@+id/btnRaise"
         android:layout_toLeftOf="@+id/btnRaise"
-        android:layout_toStartOf="@+id/btnRaise" />
+        android:layout_toStartOf="@+id/btnRaise"
+        android:clickable="false"
+        android:editable="false" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cost"
-        android:id="@+id/lblCardCost"
-        android:layout_alignBottom="@+id/lblQty"
-        android:layout_alignRight="@+id/btnLoad"
-        android:layout_alignEnd="@+id/btnLoad" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Card Name"
-        android:id="@+id/lblName"
-        android:layout_alignBottom="@+id/lblCardCost"
+        android:id="@+id/txtName"
+        android:layout_above="@+id/btnAddCard"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/txtCost"
+        android:layout_toLeftOf="@+id/txtCost"
+        android:clickable="false"
+        android:editable="false" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtCost"
+        android:layout_alignBottom="@+id/btnRaise"
+        android:layout_toLeftOf="@+id/txtQty"
+        android:layout_toStartOf="@+id/txtQty"
+        android:clickable="false"
+        android:editable="false" />
 
 </RelativeLayout>

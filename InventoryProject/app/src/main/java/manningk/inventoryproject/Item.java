@@ -54,6 +54,5 @@ public class Item
     {
         Item i = new Item("Widget123", 12.95, 123);
         return i;
-
     }
 }
