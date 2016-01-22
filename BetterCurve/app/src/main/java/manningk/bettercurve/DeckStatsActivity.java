@@ -8,7 +8,7 @@ import android.view.View;
 /**
  * Created by Kevin on 1/19/2016.
  */
-public class DeckStats extends AppCompatActivity {
+public class DeckStatsActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +18,7 @@ public class DeckStats extends AppCompatActivity {
     public void btnGoHomeOnClick (View view)
     {
         finish();
-        //Intent intent = new Intent(this, MainScreen.class);
+        //Intent intent = new Intent(this, MainActivity.class);
         //intent.putExtra() <-Adds info to be passed into the new activity, such as deck loading.
         //startActivity(intent);
     }

@@ -4,9 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
-public class MainScreen extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
 
 
@@ -21,10 +20,9 @@ public class MainScreen extends AppCompatActivity {
     public void btnBuildScreenOnClick (View view)
     {
 
-        Intent intent = new Intent(this, BuildDeck.class);
+        Intent intent = new Intent(this, BuildDeckActivity.class);
         //intent.putExtra() <-Adds info to be passed into the new activity, such as deck loading.
         startActivity(intent);
-
     }
 
     /*public void btnsCancelOnClick (View view)
@@ -41,7 +39,7 @@ public class MainScreen extends AppCompatActivity {
 
     public void btnStatsScreenOnClick (View view)
     {
-        Intent intent = new Intent(this, DeckStats.class);
+        Intent intent = new Intent(this, DeckStatsActivity.class);
         //intent.putExtra() <-Adds info to be passed into the new activity, such as deck loading.
         startActivity(intent);
 

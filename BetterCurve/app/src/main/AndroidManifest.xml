@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainScreen">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -16,12 +16,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DeckStats"
+            android:name=".DeckStatsActivity"
             android:label="@string/title_DeckStats"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".BuildDeck"
+            android:name=".BuildDeckActivity"
             android:label="@string/title_BuildDeck"
             android:theme="@style/AppTheme">
 
