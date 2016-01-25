@@ -5,7 +5,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 /**
- * Created by Kevin on 1/21/2016.
+ * Created by Kevin on 1/24/2016.
  */
 public class InterfaceComponents {
     private EditText txtName;
