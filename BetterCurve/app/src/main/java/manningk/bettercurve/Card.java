@@ -3,8 +3,7 @@ package manningk.bettercurve;
 /**
  * Created by Kevin on 1/16/2016.
  */
-public class Card
-{
+public class Card {
     private String m_strGame;
     private String m_strSet;
     private int m_intSetNumber;
@@ -13,10 +12,10 @@ public class Card
     private String m_strAbility;
     private String m_strFlavor;
     private int[] m_intStats;
+    private String[] m_strStatNames;
 
     public Card(String m_strGame, String m_strSet, int m_intSetNumberSetNumber, String m_strName,
-                int m_intCost, String m_strAbility, String m_strFlavor, int[] m_intStats)
-    {
+                int m_intCost, String m_strAbility, String m_strFlavor, int[] m_intStats, String[] m_strStatNames) {
         this.m_strGame = m_strGame;
         this.m_strSet = m_strSet;
         this.m_intSetNumber = m_intSetNumberSetNumber;
@@ -25,6 +24,7 @@ public class Card
         this.m_strAbility = m_strAbility;
         this.m_strFlavor = m_strFlavor;
         this.m_intStats = m_intStats;
+        this.m_strStatNames = m_strStatNames;
     }
 
     public String getM_strGame() {
@@ -91,11 +91,36 @@ public class Card
         this.m_intStats = m_intStats;
     }
 
-    public static Card getTestCard()
-    {
-        int intStats[] = {7,7};
-        Card testCard = new Card("Make Believe", "Fh", 001, "Goobity Gook", 4, "Be Awesome", "Just BE.", intStats);
+    public static Card getTestCard() {
+        int intStats[] = {7, 7};
+        String strStatNames[] = {"Attack", "Defense"};
+        Card testCard = new Card("Make Believe", "Fh", 001, "Goobity Gook", 4, "Be Awesome",
+                "Just BE.", intStats, strStatNames);
         return testCard;
     }
+
+    public int getNumberOfComponents() {
+        return 7 + m_intStats.length + m_strStatNames.length;
+    }
+
+    public String[] statsToArray() {
+        String cardDetails[] = new String[getNumberOfComponents()];
+
+        cardDetails[0] = m_strName.toString();
+        cardDetails[1] = m_strGame.toString();
+        cardDetails[2] = m_strSet.toString();
+        cardDetails[3] = String.valueOf(m_intSetNumber);
+        cardDetails[4] = String.valueOf(m_intCost);
+        cardDetails[5] = m_strAbility.toString();
+        cardDetails[6] = m_strFlavor.toString();
+
+        for (int i = 0; i < m_intStats.length + m_strStatNames.length; i += 2) {
+            cardDetails[6 + i] = m_strStatNames[i / 2].toString();
+            cardDetails[7 + i] = String.valueOf(m_intStats[i / 2]);
+        }
+
+        return cardDetails;
+    }
+
 }
 

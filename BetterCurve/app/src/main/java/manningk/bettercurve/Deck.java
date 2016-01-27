@@ -11,12 +11,14 @@ public class Deck
 {
     private static Deck deck;
     private ArrayList<Card> deckList;
+    private int quantities[];
     private int nextCardID;
 
 
     private Deck()
     {
         deckList = new ArrayList<>();
+        quantities = new int[deckList.size()];
         deckList.add(Card.getTestCard());
         nextCardID++;
     }
@@ -50,6 +52,15 @@ public class Deck
         }
 
         return tempDeck.size();
+    }
+
+    public int getDeckSize()
+    {
+        int deckSize = 0;
+        for(int i = 0; i < quantities.length; i++)
+            deckSize += quantities[i];
+
+        return deckSize;
     }
 
 }

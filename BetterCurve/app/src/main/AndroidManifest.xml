@@ -24,6 +24,11 @@
             android:name=".BuildDeckActivity"
             android:label="@string/title_BuildDeck"
             android:theme="@style/AppTheme">
+        </activity>
+        <activity
+            android:name=".DetailsScreenActivity"
+            android:label="@string/title_CardDetails"
+            android:theme="@style/AppTheme">
 
         </activity>
     </application>

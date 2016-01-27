@@ -31,10 +31,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Load Deck"
-        android:id="@+id/btnLoad"
+        android:text="Add Card"
+        android:id="@+id/btnAdd"
         android:layout_alignTop="@+id/btnSave"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="btnAddCardOnClick" />
 
     <ScrollView
         android:layout_width="match_parent"
