@@ -16,6 +16,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * Created by Kevin on 1/19/2016.
  */
@@ -41,6 +43,8 @@ public class BuildDeckActivity extends AppCompatActivity {
 
         ScrollView srlDeckHolder = (ScrollView) findViewById(R.id.srlDeckHolder);
         srlDeckHolder.addView(srlLayoutView);
+
+        testDeck = Deck.getDeck();
 
     }
 
@@ -130,12 +134,59 @@ public class BuildDeckActivity extends AppCompatActivity {
         addRow();
     }
 
+    public void btnSaveDeckOnClick(View view)
+    {
+        ArrayList<View> arrAllCardData = getAllChildren(srlLayoutView);
+
+        int j = 0;
+        int intQty[] = new int[arrAllCardData.size()/11];
+
+        for(int i = 0; i < arrAllCardData.size(); i += 11)
+        {
+
+            EditText qty = (EditText) arrAllCardData.get(i + 6);
+           intQty[j] = Integer.parseInt(qty.getText().toString());
+
+            j++;
+
+        }
+
+        int testQty[] = intQty;
+
+
+        int hold = 0;
+    }
+
     public void buildCardInfo(Card card)
     {
         String passedName = "Card Details";
         Intent intent = new Intent(this, DetailsScreenActivity.class);
         intent.putExtra(passedName, card.statsToArray()); //<-Adds info to be passed into the new activity, such as deck loading.
         startActivity(intent);
+    }
+
+    private ArrayList<View> getAllChildren(View v) {
+
+        if (!(v instanceof ViewGroup)) {
+            ArrayList<View> viewArrayList = new ArrayList<View>();
+            viewArrayList.add(v);
+            return viewArrayList;
+        }
+
+        ArrayList<View> result = new ArrayList<View>();
+
+        ViewGroup vg = (ViewGroup) v;
+        for (int i = 0; i < vg.getChildCount(); i++) {
+
+            View child = vg.getChildAt(i);
+
+            ArrayList<View> viewArrayList = new ArrayList<View>();
+            viewArrayList.add(v);
+            viewArrayList.addAll(getAllChildren(child));
+
+            result.addAll(viewArrayList);
+        }
+        return result;
     }
 
 
