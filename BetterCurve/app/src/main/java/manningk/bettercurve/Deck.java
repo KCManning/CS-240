@@ -11,14 +11,14 @@ public class Deck
 {
     private static Deck deck;
     private ArrayList<Card> deckList;
-    private int quantities[];
+    private ArrayList<String> quantities;
     private int nextCardID;
 
 
     private Deck()
     {
         deckList = new ArrayList<>();
-        quantities = new int[deckList.size()];
+        quantities = new ArrayList<>();
         deckList.add(Card.getTestCard());
         nextCardID++;
     }
@@ -41,6 +41,32 @@ public class Deck
         return deckList.get(id);
     }
 
+    public void addCard(Card card)
+    {
+        deckList.add(card);
+        quantities.add("1");
+    }
+
+    public void addCard(Card card, int qty)
+    {
+        deckList.add(card);
+        quantities.add(Integer.toString(qty));
+    }
+
+    public void removeCard(Card card)
+    {
+        int index = deckList.indexOf(card);
+
+        deckList.remove(index);
+        quantities.remove(index);
+    }
+
+    public void removeCard(int index)
+    {
+        deckList.remove(index);
+        quantities.remove(index);
+    }
+
     public int uniques()
     {
         ArrayList<Card> tempDeck = new ArrayList<Card>();
@@ -57,8 +83,8 @@ public class Deck
     public int getDeckSize()
     {
         int deckSize = 0;
-        for(int i = 0; i < quantities.length; i++)
-            deckSize += quantities[i];
+        for(int i = 0; i < quantities.size(); i++)
+            deckSize += Integer.parseInt(quantities.get(i));
 
         return deckSize;
     }

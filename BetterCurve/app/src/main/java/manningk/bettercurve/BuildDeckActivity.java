@@ -48,8 +48,17 @@ public class BuildDeckActivity extends AppCompatActivity {
 
     }
 
-    public void btnCancelOnClick(View view)
-    {
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    public void btnCancelOnClick(View view) {
         finish();
     }
 
@@ -129,36 +138,28 @@ public class BuildDeckActivity extends AppCompatActivity {
     }
 
 
-    public void btnAddCardOnClick(View view)
-    {
+    public void btnAddCardOnClick(View view) {
         addRow();
     }
 
-    public void btnSaveDeckOnClick(View view)
-    {
+    public void btnSaveDeckOnClick(View view) {
         ArrayList<View> arrAllCardData = getAllChildren(srlLayoutView);
 
         int j = 0;
-        int intQty[] = new int[arrAllCardData.size()/11];
+        int intQty[] = new int[arrAllCardData.size() / 11];
 
-        for(int i = 0; i < arrAllCardData.size(); i += 11)
+        for (int i = 0; i < arrAllCardData.size(); i += 11)
         {
-
             EditText qty = (EditText) arrAllCardData.get(i + 6);
-           intQty[j] = Integer.parseInt(qty.getText().toString());
+            intQty[j] = Integer.parseInt(qty.getText().toString());
 
             j++;
-
         }
 
         int testQty[] = intQty;
-
-
-        int hold = 0;
     }
 
-    public void buildCardInfo(Card card)
-    {
+    public void buildCardInfo(Card card) {
         String passedName = "Card Details";
         Intent intent = new Intent(this, DetailsScreenActivity.class);
         intent.putExtra(passedName, card.statsToArray()); //<-Adds info to be passed into the new activity, such as deck loading.

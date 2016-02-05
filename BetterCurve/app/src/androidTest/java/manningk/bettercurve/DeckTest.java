@@ -22,18 +22,19 @@ public class DeckTest extends AndroidTestCase {
         assertNotNull("getDeckList failed", list);
     }
 
-    //Not yet implemented
-    /*
+    //Unknown error cause
+/*
         public void testValidGetCard() throws Exception {
             int intStats[] = {3, 5};
             String strStatNames[] = {"Defense", "Durability"};
             Card card = new Card("Make Believe", "Fh", 002, "False Defense", 7, "Please Work",
                     "I AM.", intStats, strStatNames);
             d.addCard(card);
-            Card c = d.getCard(card.getCardID());
+           // Card c = d.getCard(card.getM_strName());
             assertNotNull("getCard failed", c);
         }
 */
+
     public void testInvalidGetCard() throws Exception {
         Card c70 = d.getCard(70);
         assertNull("getCard failed", c70);
@@ -49,8 +50,7 @@ public class DeckTest extends AndroidTestCase {
         assertTrue("addCard failed", size2 - size1 == 1);
     }
 
-    //Not yet implemented
-    /*
+
     public void testInvalidAddCard() throws Exception {
         int size1 = d.getDeckList().size();
         Card c1 = null;
@@ -58,27 +58,22 @@ public class DeckTest extends AndroidTestCase {
         int size2 = d.getDeckList().size();
         assertTrue("addCard failed", size2 - size1 == 0);
     }
-*/
 
-//Not yet implemented
-    /*
+
     public void testValidDeleteCard() throws Exception {
         int size1 = d.getDeckList().size();
-        d.deleteCard(0);
+        d.removeCard(0);
         int size2 = d.getDeckList().size();
         assertTrue("deleteCard failed", size1 - size2 == 1);
     }
-*/
 
-//Not yet implemented
-/*
     public void testInvalidDeleteCard() throws Exception {
         int size1 = d.getDeckList().size();
-        d.deleteCard(10);
+        d.removeCard(10);
         int size2 = d.getDeckList().size();
         assertTrue("deleteCard failed", size1 - size2 == 0);
     }
-    */
+
 
 
 }
