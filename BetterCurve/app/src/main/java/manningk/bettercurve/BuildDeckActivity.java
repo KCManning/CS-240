@@ -28,7 +28,7 @@ public class BuildDeckActivity extends AppCompatActivity {
     InterfaceComponents testInterface;
     LinearLayout srlLayoutView;
 
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -44,21 +44,27 @@ public class BuildDeckActivity extends AppCompatActivity {
         ScrollView srlDeckHolder = (ScrollView) findViewById(R.id.srlDeckHolder);
         srlDeckHolder.addView(srlLayoutView);
 
-        testDeck = Deck.getDeck();
-
+        testDeck = Deck.getDeck(this.getApplicationContext());
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        saveDeck();
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
 
+        for (int i = 0; i < testDeck.getDeckList().size(); i++) {
+            addRow(testDeck.getCard(i), testDeck.getQty(i));
+        }
+        clearDeck();
     }
 
     public void btnCancelOnClick(View view) {
+        clearDeck();
         finish();
     }
 
@@ -71,8 +77,6 @@ public class BuildDeckActivity extends AppCompatActivity {
                 new LinearLayout.LayoutParams(90,
                         android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 
-
-        // EditText txtName = (EditText) findViewById(R.id.txtName);
         EditText txtName = new EditText(this);
         txtName.setText(testCard.getM_strName());
         txtName.setLayoutParams(txtLayoutParams);
@@ -83,15 +87,87 @@ public class BuildDeckActivity extends AppCompatActivity {
             }
         });
 
-        //EditText txtCost = (EditText) findViewById(R.id.txtCost);
         EditText txtCost = new EditText(this);
         txtCost.setText(String.valueOf(testCard.getM_intCost()));
         txtCost.setLayoutParams(smallLayoutParams);
         txtCost.setFocusable(false);
 
-        //EditText txtQty = (EditText) findViewById(R.id.txtQty);
         EditText txtQty = new EditText(this);
         txtQty.setText(String.valueOf(1));
+        txtQty.setLayoutParams(smallLayoutParams);
+        txtQty.setFocusable(false);
+
+        //define and create a linear layout
+        LinearLayout grpLayoutView = new LinearLayout(this);
+        grpLayoutView.setOrientation(LinearLayout.HORIZONTAL);
+        grpLayoutView.setGravity(Gravity.TOP | Gravity.LEFT);
+
+
+        Button btnRaise = new Button(this);
+        btnRaise.setText("+");
+        btnRaise.setLayoutParams(smallLayoutParams);
+        btnRaise.setOnClickListener(new ImprovedListener(txtQty) {
+            public void onClick(View arg0) {
+                int current = Integer.parseInt(txtQty.getText().toString());
+                txtQty.setText(String.valueOf(current + 1));
+            }
+        });
+
+        Button btnLower = new Button(this);
+        btnLower.setText("-");
+        btnLower.setLayoutParams(smallLayoutParams);
+        btnLower.setOnClickListener(new ImprovedListener(txtQty, grpLayoutView) {
+            public void onClick(View arg0) {
+                int current = Integer.parseInt(txtQty.getText().toString());
+                if (current > 1)
+                    txtQty.setText(String.valueOf(current - 1));
+                else {
+                    srlLayoutView.removeView(grpLayoutView);
+
+                }
+
+            }
+        });
+
+        grpLayoutView.addView(txtName);
+        grpLayoutView.addView(txtCost);
+        grpLayoutView.addView(txtQty);
+        grpLayoutView.addView(btnRaise);
+        grpLayoutView.addView(btnLower);
+
+        srlLayoutView.addView(grpLayoutView);
+    }
+
+    public void addRow(Card card, int qty) {
+        android.widget.LinearLayout.LayoutParams txtLayoutParams =
+                new LinearLayout.LayoutParams(
+                        350,
+                        android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+        android.widget.LinearLayout.LayoutParams smallLayoutParams =
+                new LinearLayout.LayoutParams(90,
+                        android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+
+
+        // EditText txtName = (EditText) findViewById(R.id.txtName);
+        EditText txtName = new EditText(this);
+        txtName.setText(card.getM_strName());
+        txtName.setLayoutParams(txtLayoutParams);
+        txtName.setFocusable(false);
+        txtName.setOnClickListener(new ImprovedListener(testCard) {
+            public void onClick(View arg0) {
+                buildCardInfo(card);
+            }
+        });
+
+        //EditText txtCost = (EditText) findViewById(R.id.txtCost);
+        EditText txtCost = new EditText(this);
+        txtCost.setText(String.valueOf(card.getM_intCost()));
+        txtCost.setLayoutParams(smallLayoutParams);
+        txtCost.setFocusable(false);
+
+        //EditText txtQty = (EditText) findViewById(R.id.txtQty);
+        EditText txtQty = new EditText(this);
+        txtQty.setText(String.valueOf(qty));
         txtQty.setLayoutParams(smallLayoutParams);
         txtQty.setFocusable(false);
 
@@ -135,28 +211,36 @@ public class BuildDeckActivity extends AppCompatActivity {
         grpLayoutView.addView(btnLower);
 
         srlLayoutView.addView(grpLayoutView);
-    }
 
+    }
 
     public void btnAddCardOnClick(View view) {
         addRow();
     }
 
     public void btnSaveDeckOnClick(View view) {
+        clearDeck();
+        saveDeck();
+    }
+
+    public void saveDeck() {
+        clearDeck();
         ArrayList<View> arrAllCardData = getAllChildren(srlLayoutView);
 
-        int j = 0;
         int intQty[] = new int[arrAllCardData.size() / 11];
 
-        for (int i = 0; i < arrAllCardData.size(); i += 11)
-        {
+        for (int i = 0; i < arrAllCardData.size(); i += 11) {
             EditText qty = (EditText) arrAllCardData.get(i + 6);
-            intQty[j] = Integer.parseInt(qty.getText().toString());
-
-            j++;
+            testDeck.addCard(testCard.getTestCard(), Integer.parseInt(qty.getText().toString()));
         }
 
-        int testQty[] = intQty;
+    }
+
+    public void clearDeck() {
+        if (testDeck.uniques() > 0)
+            for (int i = testDeck.uniques(); i > 0; i--) {
+                testDeck.removeCard(i);
+            }
     }
 
     public void buildCardInfo(Card card) {

@@ -1,11 +1,16 @@
 package manningk.bettercurve;
 
+import android.content.Context;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 /**
  * Created by Kevin on 1/16/2016.
+ *
+ * This class operates and serves as the "DataManager" class
  */
 public class Deck
 {
@@ -15,18 +20,17 @@ public class Deck
     private int nextCardID;
 
 
-    private Deck()
+    private Deck(Context context)
     {
         deckList = new ArrayList<>();
         quantities = new ArrayList<>();
-        deckList.add(Card.getTestCard());
         nextCardID++;
     }
 
-    public static Deck getDeck()
+    public static Deck getDeck(Context context)
     {
         if(deck == null)
-            deck = new Deck();
+            deck = new Deck(context);
 
         return deck;
     }
@@ -40,6 +44,8 @@ public class Deck
     {
         return deckList.get(id);
     }
+
+    public int getQty(int id) { return Integer.parseInt(quantities.get(id)); }
 
     public void addCard(Card card)
     {
@@ -63,6 +69,7 @@ public class Deck
 
     public void removeCard(int index)
     {
+        index--;
         deckList.remove(index);
         quantities.remove(index);
     }
