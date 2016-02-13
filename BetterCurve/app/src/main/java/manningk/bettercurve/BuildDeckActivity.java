@@ -28,6 +28,10 @@ public class BuildDeckActivity extends AppCompatActivity {
     InterfaceComponents testInterface;
     LinearLayout srlLayoutView;
 
+    final int MESSAGE_REQUEST = 1;
+    static final String CARD_ID = "feh001";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,10 +87,11 @@ public class BuildDeckActivity extends AppCompatActivity {
         txtName.setFocusable(false);
         txtName.setOnClickListener(new ImprovedListener(testCard) {
             public void onClick(View arg0) {
-                buildCardInfo(card);
+                buildCardInfo();
             }
         });
 
+        /*
         EditText txtCost = new EditText(this);
         txtCost.setText(String.valueOf(testCard.getM_intCost()));
         txtCost.setLayoutParams(smallLayoutParams);
@@ -96,14 +101,14 @@ public class BuildDeckActivity extends AppCompatActivity {
         txtQty.setText(String.valueOf(1));
         txtQty.setLayoutParams(smallLayoutParams);
         txtQty.setFocusable(false);
-
+*/
         //define and create a linear layout
         LinearLayout grpLayoutView = new LinearLayout(this);
         grpLayoutView.setOrientation(LinearLayout.HORIZONTAL);
         grpLayoutView.setGravity(Gravity.TOP | Gravity.LEFT);
 
 
-        Button btnRaise = new Button(this);
+        /*Button btnRaise = new Button(this);
         btnRaise.setText("+");
         btnRaise.setLayoutParams(smallLayoutParams);
         btnRaise.setOnClickListener(new ImprovedListener(txtQty) {
@@ -127,13 +132,13 @@ public class BuildDeckActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
 
         grpLayoutView.addView(txtName);
-        grpLayoutView.addView(txtCost);
-        grpLayoutView.addView(txtQty);
-        grpLayoutView.addView(btnRaise);
-        grpLayoutView.addView(btnLower);
+        //grpLayoutView.addView(txtCost);
+        //grpLayoutView.addView(txtQty);
+        //grpLayoutView.addView(btnRaise);
+        //grpLayoutView.addView(btnLower);
 
         srlLayoutView.addView(grpLayoutView);
     }
@@ -250,6 +255,16 @@ public class BuildDeckActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void buildCardInfo() {
+
+        Intent intent = new Intent(this, DetailsScreenActivity.class);
+        //Intent intent = new Intent(this, CardListActivity.class);
+        startActivityForResult(intent, MESSAGE_REQUEST);
+    }
+
+
+
+
     private ArrayList<View> getAllChildren(View v) {
 
         if (!(v instanceof ViewGroup)) {
@@ -274,5 +289,12 @@ public class BuildDeckActivity extends AppCompatActivity {
         return result;
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(requestCode == MESSAGE_REQUEST && resultCode == RESULT_OK)
+        {
+            String message = (String) data.getStringExtra(CARD_ID);
+
+        }
+    }
 
 }

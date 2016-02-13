@@ -3,4 +3,5 @@
     <string name="title_DeckStats">Deck Curve</string>
     <string name="title_BuildDeck">Build a Deck</string>
     <string name="title_CardDetails">Card Details</string>
+    <string name="button_Return">Return</string>
 </resources>

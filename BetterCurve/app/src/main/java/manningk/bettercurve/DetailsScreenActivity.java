@@ -28,6 +28,16 @@ public class DetailsScreenActivity extends AppCompatActivity {
        finish();
     }
 
+    public void btnAddOnClick(View view){
+
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(BuildDeckActivity.CARD_ID, "bil125");
+
+        setResult(RESULT_OK, resultIntent);
+
+        finish();
+    }
+
 }
 
 
