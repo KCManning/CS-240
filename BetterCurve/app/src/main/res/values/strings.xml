@@ -4,4 +4,8 @@
     <string name="title_BuildDeck">Build a Deck</string>
     <string name="title_CardDetails">Card Details</string>
     <string name="button_Return">Return</string>
+    <string name="button_Save">Save Deck</string>
+    <string name="button_Add">Add Card</string>
+    <string name="button_ViewStats">View Stats</string>
+    <string name="button_NewDeck">New Deck</string>
 </resources>

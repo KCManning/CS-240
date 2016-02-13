@@ -12,7 +12,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Stats"
+        android:text="@string/button_ViewStats"
         android:id="@+id/btnStatsScreen"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -22,7 +22,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Build Deck"
+        android:text="@string/button_NewDeck"
         android:id="@+id/btnBuildScreen"
         android:layout_alignBottom="@+id/btnStatsScreen"
         android:layout_alignParentRight="true"
