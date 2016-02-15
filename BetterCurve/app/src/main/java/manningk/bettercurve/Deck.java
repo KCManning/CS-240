@@ -15,12 +15,15 @@ import java.util.prefs.Preferences;
 public class Deck
 {
     private static Deck deck;
+    private String deckName;
+    private String gameName;
+    private String deckType;
     private ArrayList<Card> deckList;
     private ArrayList<String> quantities;
     private int nextCardID;
 
 
-    private Deck(Context context)
+    public Deck(Context context)
     {
         deckList = new ArrayList<>();
         quantities = new ArrayList<>();
@@ -96,4 +99,15 @@ public class Deck
         return deckSize;
     }
 
+    public String getDeckName() {
+        return deckName;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public String getDeckType() {
+        return deckType;
+    }
 }

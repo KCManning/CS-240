@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ScrollView;
 
 import java.io.BufferedInputStream;
 import java.io.Externalizable;
@@ -16,14 +20,28 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
+    DataManager dm;
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-        //pollDecks();
+        dm = DataManager.getManager(this);
+        ListView lstDecks = (ListView) findViewById(R.id.lstDecks);
+        //adapter= new ArrayAdapter<String>(this, android.R.id.lstDecks,listItems);
 
+        //pollDecks();
+    }
+
+    public void fillList() {
+        int j = 0;
+        for (int i = dm.getDeckCount(); i > 0; i--) {
+            adapter.add(dm.getDeck(j).getDeckName() + dm.getDeck(j).getDeckType() +
+                    dm.getDeck(j).getGameName());
+            j++;
+        }
     }
 
 
