@@ -87,7 +87,7 @@ public class BuildDeckActivity extends AppCompatActivity {
         txtName.setFocusable(false);
         txtName.setOnClickListener(new ImprovedListener(testCard) {
             public void onClick(View arg0) {
-                buildCardInfo();
+                buildCardInfo(testCard);
             }
         });
 
