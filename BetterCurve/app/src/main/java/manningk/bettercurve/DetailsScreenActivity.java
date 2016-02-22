@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import java.util.ArrayList;
+
 /**
  * Created by Kevin on 1/26/2016.
  */
@@ -18,9 +20,17 @@ public class DetailsScreenActivity extends AppCompatActivity {
         String passedName = "Card Details";
 
 
-        String string1[] = getIntent().getExtras().getStringArray(passedName);
+        ArrayList <String[]> list = (ArrayList<String[]>) getIntent().getSerializableExtra(passedName);
+        //int size = getIntent().getExtras().size();
+
+        //String string1[] = new String[size];
+        //string1[] = getIntent().getExtras().getStringArray(passedName);
 
         int hold = 0;
+        //***
+        //Program crashing after this, CANNOT find cause
+        //Need outside eyes
+        //***
     }
 
     public void btnDetailsCancelOnClick(View view)
