@@ -20,11 +20,10 @@ public class DetailsScreenActivity extends AppCompatActivity {
         String passedName = "Card Details";
 
 
-        ArrayList <String[]> list = (ArrayList<String[]>) getIntent().getSerializableExtra(passedName);
+        //ArrayList <String[]> list = (ArrayList<String[]>) getIntent().getSerializableExtra(passedName);
         //int size = getIntent().getExtras().size();
 
-        //String string1[] = new String[size];
-        //string1[] = getIntent().getExtras().getStringArray(passedName);
+        String string1[] = getIntent().getExtras().getStringArray(passedName);
 
         int hold = 0;
         //***
@@ -35,7 +34,9 @@ public class DetailsScreenActivity extends AppCompatActivity {
 
     public void btnDetailsCancelOnClick(View view)
     {
-       finish();
+
+        setResult(RESULT_CANCELED);
+        //finish();
     }
 
     public void btnAddOnClick(View view){
@@ -45,7 +46,7 @@ public class DetailsScreenActivity extends AppCompatActivity {
 
         setResult(RESULT_OK, resultIntent);
 
-        finish();
+        //finish();
     }
 
 }
