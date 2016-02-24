@@ -60,85 +60,57 @@ public class BuildDeckActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        srlLayoutView.removeAllViews();
 
         for (int i = 0; i < testDeck.getDeckList().size(); i++) {
-            addRow(testDeck.getCard(i), testDeck.getQty(i));
+            if(testDeck.getQty(i) == 0)
+                addRow();
+            else
+                addRow(testDeck.getCard(i), testDeck.getQty(i));
         }
-        clearDeck();
+        testDeck.emptyDeck();
+        //clearDeck();
     }
 
     public void btnCancelOnClick(View view) {
-        clearDeck();
+        testDeck.emptyDeck();
+        //clearDeck();
         finish();
     }
 
     public void addRow() {
-        android.widget.LinearLayout.LayoutParams txtLayoutParams =
-                new LinearLayout.LayoutParams(
-                        350,
-                        android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-        android.widget.LinearLayout.LayoutParams smallLayoutParams =
-                new LinearLayout.LayoutParams(90,
-                        android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        EditText txtName = new EditText(this);
-        txtName.setText(testCard.getM_strName());
-        txtName.setLayoutParams(txtLayoutParams);
-        txtName.setFocusable(false);
-        txtName.setOnClickListener(new ImprovedListener(testCard) {
-            public void onClick(View arg0) {
-                buildCardInfo(testCard);
-            }
-        });
-
-        /*
-        EditText txtCost = new EditText(this);
-        txtCost.setText(String.valueOf(testCard.getM_intCost()));
-        txtCost.setLayoutParams(smallLayoutParams);
-        txtCost.setFocusable(false);
-
-        EditText txtQty = new EditText(this);
-        txtQty.setText(String.valueOf(1));
-        txtQty.setLayoutParams(smallLayoutParams);
-        txtQty.setFocusable(false);
-*/
         //define and create a linear layout
         LinearLayout grpLayoutView = new LinearLayout(this);
         grpLayoutView.setOrientation(LinearLayout.HORIZONTAL);
         grpLayoutView.setGravity(Gravity.TOP | Gravity.LEFT);
 
+        android.widget.LinearLayout.LayoutParams txtLayoutParams =
+                new LinearLayout.LayoutParams(
+                        350, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        /*Button btnRaise = new Button(this);
-        btnRaise.setText("+");
-        btnRaise.setLayoutParams(smallLayoutParams);
-        btnRaise.setOnClickListener(new ImprovedListener(txtQty) {
+        EditText txtName = new EditText(this);
+        txtName.setText(testCard.getM_strName());
+        txtName.setLayoutParams(txtLayoutParams);
+        txtName.setFocusable(false);
+        txtName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
-                int current = Integer.parseInt(txtQty.getText().toString());
-                txtQty.setText(String.valueOf(current + 1));
-            }
-        });
+                buildCardInfo(); }});
 
+        EditText txtCost = new EditText(this);
+        txtCost.setVisibility(View.INVISIBLE);
+        EditText txtQty = new EditText(this);
+        txtQty.setText("0");
+        txtQty.setVisibility(View.INVISIBLE);
+        Button btnRaise = new Button(this);
+        btnRaise.setVisibility(View.INVISIBLE);
         Button btnLower = new Button(this);
-        btnLower.setText("-");
-        btnLower.setLayoutParams(smallLayoutParams);
-        btnLower.setOnClickListener(new ImprovedListener(txtQty, grpLayoutView) {
-            public void onClick(View arg0) {
-                int current = Integer.parseInt(txtQty.getText().toString());
-                if (current > 1)
-                    txtQty.setText(String.valueOf(current - 1));
-                else {
-                    srlLayoutView.removeView(grpLayoutView);
-
-                }
-
-            }
-        });*/
+        btnLower.setVisibility(View.INVISIBLE);
 
         grpLayoutView.addView(txtName);
-        //grpLayoutView.addView(txtCost);
-        //grpLayoutView.addView(txtQty);
-        //grpLayoutView.addView(btnRaise);
-        //grpLayoutView.addView(btnLower);
+        grpLayoutView.addView(txtCost);
+        grpLayoutView.addView(txtQty);
+        grpLayoutView.addView(btnRaise);
+        grpLayoutView.addView(btnLower);
 
         srlLayoutView.addView(grpLayoutView);
     }
@@ -224,13 +196,16 @@ public class BuildDeckActivity extends AppCompatActivity {
     }
 
     public void btnSaveDeckOnClick(View view) {
-        clearDeck();
+        testDeck.emptyDeck();
+        //clearDeck();
         saveDeck();
     }
 
     public void saveDeck() {
-        clearDeck();
+        testDeck.emptyDeck();
+        //clearDeck();
         ArrayList<View> arrAllCardData = getAllChildren(srlLayoutView);
+
 
         int intQty[] = new int[arrAllCardData.size() / 11];
 
@@ -241,13 +216,14 @@ public class BuildDeckActivity extends AppCompatActivity {
 
     }
 
+    /*
     public void clearDeck() {
         if (testDeck.uniques() > 0)
             for (int i = testDeck.uniques(); i > 0; i--) {
                 testDeck.removeCard(i);
             }
     }
-
+*/
     public void buildCardInfo(Card card) {
         String passedName = "Card Details";
         Intent intent = new Intent(this, DetailsScreenActivity.class);
@@ -257,13 +233,10 @@ public class BuildDeckActivity extends AppCompatActivity {
 
     public void buildCardInfo() {
 
-        Intent intent = new Intent(this, DetailsScreenActivity.class);
-        //Intent intent = new Intent(this, CardListActivity.class);
+        //Intent intent = new Intent(this, DetailsScreenActivity.class);
+        Intent intent = new Intent(this, CardListActivity.class);
         startActivityForResult(intent, MESSAGE_REQUEST);
     }
-
-
-
 
     private ArrayList<View> getAllChildren(View v) {
 

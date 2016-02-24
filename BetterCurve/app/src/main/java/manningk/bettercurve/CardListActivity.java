@@ -12,10 +12,13 @@ public class CardListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_screen);
+        setContentView(R.layout.activity_card_list_screen);
 
         //pollDecks();
+        String passedName = "Card Details";
 
+
+        int hold = 0;
     }
 
     public void btnListCancelOnClick(View view)

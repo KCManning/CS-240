@@ -7,32 +7,31 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+    tools:context=".CardListActivity">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_ViewStats"
+        android:text="@string/button_Filter"
         android:id="@+id/btnFilter"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="btnStatsScreenOnClick" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_NewDeck"
-        android:id="@+id/btnBuildScreen"
+        android:text="@string/button_Return"
+        android:id="@+id/btnReturn"
         android:layout_alignBottom="@+id/btnFilter"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="btnBuildScreenOnClick" />
+        android:onClick="btnListCancelOnClick" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lstDecks"
+        android:id="@+id/lstCards"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

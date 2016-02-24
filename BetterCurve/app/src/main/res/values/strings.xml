@@ -8,4 +8,5 @@
     <string name="button_Add">Add Card</string>
     <string name="button_ViewStats">View Stats</string>
     <string name="button_NewDeck">New Deck</string>
+    <string name="button_Filter">Filter</string>
 </resources>
