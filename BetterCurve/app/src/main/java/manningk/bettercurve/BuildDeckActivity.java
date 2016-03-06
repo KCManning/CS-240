@@ -23,6 +23,7 @@ import java.util.ArrayList;
  */
 public class BuildDeckActivity extends AppCompatActivity {
 
+    DataManager dm = new DataManager(this);
     Card testCard;
     Deck testDeck;
     InterfaceComponents testInterface;
@@ -48,7 +49,7 @@ public class BuildDeckActivity extends AppCompatActivity {
         ScrollView srlDeckHolder = (ScrollView) findViewById(R.id.srlDeckHolder);
         srlDeckHolder.addView(srlLayoutView);
 
-        testDeck = Deck.getDeck(this.getApplicationContext());
+        testDeck = dm.getTestDeck();
     }
 
     @Override

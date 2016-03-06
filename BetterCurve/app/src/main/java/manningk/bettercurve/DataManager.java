@@ -11,11 +11,20 @@ public class DataManager {
 
     private ArrayList<Deck> decks;
     private static DataManager dm;
+    private DataHelper db;
+    private Context context;
+
 
     public DataManager(Context context) {
         decks = new ArrayList<>();
     }
 
+    /**
+     * Singleton implementation - returns the single instance of
+     * the DataManager class.
+     *
+     * @param context the application context
+     */
     public static DataManager getManager(Context context) {
         if (dm == null)
             dm = new DataManager(context);
@@ -29,16 +38,12 @@ public class DataManager {
 
     public Deck getDeck(int id) {  return decks.get(id); }
 
-    public String[] getDeckInformation (int id)
+    public Deck getTestDeck() { return decks.get(0).getDeck(context);}
+
+    public String getDeckName (int id)
     {
         Deck deck = getDeck(id);
-        String[] info = new String[3];
-
-        info[0] = deck.getDeckName();
-        info[1] = deck.getGameName();
-        info[2] = deck.getDeckType();
-
-        return info;
+        return deck.getDeckName();
     }
 
 }

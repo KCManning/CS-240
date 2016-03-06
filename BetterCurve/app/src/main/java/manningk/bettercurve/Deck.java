@@ -9,28 +9,31 @@ import java.util.prefs.Preferences;
 
 /**
  * Created by Kevin on 1/16/2016.
- * <p/>
- * This class operates and serves as the "DataManager" class
+ *
  */
 public class Deck {
     private static Deck deck;
+    public int id;
     private String deckName;
     private String gameName;
     private String deckType;
     private ArrayList<Card> deckList;
     private ArrayList<String> quantities;
-    private int nextCardID;
 
 
-    public Deck(Context context) {
+    public Deck() {
         deckList = new ArrayList<>();
         quantities = new ArrayList<>();
-        nextCardID++;
+    }
+
+    public void setDeckName(String name)
+    {
+        deckName = name;
     }
 
     public static Deck getDeck(Context context) {
         if (deck == null)
-            deck = new Deck(context);
+            deck = new Deck();
 
         return deck;
     }

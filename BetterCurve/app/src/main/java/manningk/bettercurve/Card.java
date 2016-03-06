@@ -14,9 +14,8 @@ public class Card {
     private int[] m_intStats;
     private String[] m_strStatNames;
 
-    public Card(String m_strGame, String m_strSet, int m_intSetNumberSetNumber, String m_strName,
+    public Card(String m_strSet, int m_intSetNumberSetNumber, String m_strName,
                 int m_intCost, String m_strAbility, String m_strFlavor, int[] m_intStats, String[] m_strStatNames) {
-        this.m_strGame = m_strGame;
         this.m_strSet = m_strSet;
         this.m_intSetNumber = m_intSetNumberSetNumber;
         this.m_strName = m_strName;
