@@ -228,7 +228,7 @@ public class BuildDeckActivity extends AppCompatActivity {
     public void buildCardInfo(Card card) {
         String passedName = "Card Details";
         Intent intent = new Intent(this, DetailsScreenActivity.class);
-        intent.putExtra(passedName, card.statsToArray()); //<-Adds info to be passed into the new activity, such as deck loading.
+        //intent.putExtra(passedName, card.statsToArray()); //<-Adds info to be passed into the new activity, such as deck loading.
         startActivityForResult(intent, MESSAGE_REQUEST);
     }
 

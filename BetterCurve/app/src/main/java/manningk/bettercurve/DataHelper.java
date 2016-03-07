@@ -116,7 +116,7 @@ public class DataHelper extends SQLiteOpenHelper {
                     String cardStats = results.getString(results.getColumnIndex("cardStats"));
 
 
-                    Card c = new Card(setCode, cardNumber, cardName, cost, flavor, statNames, cardStats);
+                    Card c = new Card(setCode, cardNumber, cardName, cost, flavor, cardStats, statNames);
 
 
                     d.addCard(c);

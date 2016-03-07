@@ -21,9 +21,8 @@
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.701171875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="37.33984375" x="129.45507812500006" y="4.0">Decks</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" modelName="custom" textColor="#000000" visible="true" width="280.046875" x="2.0" y="30.701171875">_id INTEGER PRIMARS KEY AUTOINCREMENT
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" modelName="custom" textColor="#000000" visible="true" width="280.046875" x="2.0" y="30.701171875">_id INTEGER PRIMARS KEY AUTOINCREMENT
 DeckName TEXT UNIQUE NOT NULL
-GameID TEXT FOREIGN KET NOT NULL
 DeckCardsID INTEGER FOREIGN KEY NOT NULL<y:LabelModel>
               <y:ErdAttributesNodeLabelModel/>
             </y:LabelModel>
@@ -46,7 +45,7 @@ DeckCardsID INTEGER FOREIGN KEY NOT NULL<y:LabelModel>
           <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.701171875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="28.01171875" x="134.119140625" y="4.0">Sets</y:NodeLabel>
           <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.103515625" modelName="custom" textColor="#000000" visible="true" width="270.0390625" x="2.0" y="30.701171875">_id INTEGER PRIMARS KEY AUTOINCREMENT
 SetCode TEXT UNIQUE NOT NULL
-GameID INTEGER FOREIGN KEY NOT NULL<y:LabelModel>
+SetName TEXT UNIQUE NOT NULL<y:LabelModel>
               <y:ErdAttributesNodeLabelModel/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -67,8 +66,8 @@ GameID INTEGER FOREIGN KEY NOT NULL<y:LabelModel>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.701171875" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="36.009765625" x="130.1201171875" y="4.0">Cards</y:NodeLabel>
           <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="92.20703125" modelName="custom" textColor="#000000" visible="true" width="270.0390625" x="2.0" y="30.701171875">_id INTEGER PRIMARS KEY AUTOINCREMENT
-SetID INTEGER FOREIGN KEY NOT NULL
-CardNumberINTEGER NOT NULL
+SetCode INTEGER FOREIGN KEY NOT NULL
+CardNumber INTEGER NOT NULL
 CardName TEXT NOT NULL
 StatNames TEXT NOT NULL
 CardStats TEXT NOT NULL<y:LabelModel>

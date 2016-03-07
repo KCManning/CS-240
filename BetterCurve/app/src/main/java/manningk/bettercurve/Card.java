@@ -11,18 +11,17 @@ public class Card {
     private int m_intCost;
     private String m_strAbility;
     private String m_strFlavor;
-    private int[] m_intStats;
-    private String[] m_strStatNames;
+    private String m_strStats;
+    private String m_strStatNames;
 
-    public Card(String m_strSet, int m_intSetNumberSetNumber, String m_strName,
-                int m_intCost, String m_strAbility, String m_strFlavor, int[] m_intStats, String[] m_strStatNames) {
+    public Card(String m_strSet, int m_intSetNumber, String m_strName,
+                int m_intCost, String m_strFlavor, String m_strStats, String m_strStatNames) {
         this.m_strSet = m_strSet;
-        this.m_intSetNumber = m_intSetNumberSetNumber;
+        this.m_intSetNumber = m_intSetNumber;
         this.m_strName = m_strName;
         this.m_intCost = m_intCost;
-        this.m_strAbility = m_strAbility;
         this.m_strFlavor = m_strFlavor;
-        this.m_intStats = m_intStats;
+        this.m_strStats = m_strStats;
         this.m_strStatNames = m_strStatNames;
     }
 
@@ -82,6 +81,7 @@ public class Card {
         this.m_strFlavor = m_strFlavor;
     }
 
+    /*
     public int[] getM_shtStats() {
         return m_intStats;
     }
@@ -89,15 +89,16 @@ public class Card {
     public void setM_shtStats(short[] m_shtStats) {
         this.m_intStats = m_intStats;
     }
-
+*/
     public static Card getTestCard() {
-        int intStats[] = {7, 7};
-        String strStatNames[] = {"Attack", "Defense"};
-        Card testCard = new Card("Make Believe", "Fh", 001, "Goobity Gook", 4, "Be Awesome",
-                "Just BE.", intStats, strStatNames);
+        String strStats = "7,7";
+        String strStatNames = "Attack, Defense";
+        Card testCard = new Card("Fh", 001, "Goobity Gook", 4,
+                "Just BE.", strStats, strStatNames);
         return testCard;
     }
 
+    /*
     public int getNumberOfComponents() {
         return 7 + m_intStats.length + m_strStatNames.length;
     }
@@ -120,6 +121,7 @@ public class Card {
 
         return cardDetails;
     }
+    */
 
 }
 

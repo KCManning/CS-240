@@ -16,7 +16,7 @@ public class DataManager {
 
 
     public DataManager(Context context) {
-        decks = new ArrayList<>();
+        decks = new ArrayList<Deck>();
     }
 
     /**
@@ -36,12 +36,15 @@ public class DataManager {
         return decks.size();
     }
 
-    public Deck getDeck(int id) {  return decks.get(id); }
+    public Deck getDeck(int id) {
+        return decks.get(id);
+    }
 
-    public Deck getTestDeck() { return decks.get(0).getDeck(context);}
+    public Deck getTestDeck() {
+        return Deck.getDeck(context);
+    }
 
-    public String getDeckName (int id)
-    {
+    public String getDeckName(int id) {
         Deck deck = getDeck(id);
         return deck.getDeckName();
     }
