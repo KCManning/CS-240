@@ -11,12 +11,13 @@ public class DataManager {
 
     private ArrayList<Deck> decks;
     private static DataManager dm;
-    private DataHelper db;
+    public DataHelper db;
     private Context context;
 
 
     public DataManager(Context context) {
         decks = new ArrayList<Deck>();
+        db = new DataHelper(context);
     }
 
     /**

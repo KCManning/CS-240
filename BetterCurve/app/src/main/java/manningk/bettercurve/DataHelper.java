@@ -5,6 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -37,12 +41,12 @@ public class DataHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sqlStr = "CREATE TABLE Sets (_id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "SetCode TEXT, SetName TEXT)";
-        db.execSQL(sqlStr);
+       db.execSQL(sqlStr);
         sqlStr = "CREATE TABLE Cards (_id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "FOREIGN KEY(SetCode) REFERENCES Sets(SetCode),"
                 + "CardNumber INTEGER, CardName TEXT, StatNames TEXT,"
                 + "CardStats TEXT)";
-        db.execSQL(sqlStr);
+       db.execSQL(sqlStr);
         sqlStr = "CREATE TABLE DeckCards (_id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "FOREIGN KEY(DeckID) REFERENCES Cards(DeckID),"
                 + "FOREIGN KEY(CardID) REFERENCES Decks(CardIF),"
@@ -50,7 +54,7 @@ public class DataHelper extends SQLiteOpenHelper {
         db.execSQL(sqlStr);
         sqlStr = "CREATE TABLE Decks (_id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "DeckName TEXT)";
-        db.execSQL(sqlStr);
+       db.execSQL(sqlStr);
     }
 
     /**
@@ -134,6 +138,36 @@ public class DataHelper extends SQLiteOpenHelper {
                 db.close();
             }
         }
+    }
+
+
+    private void setCards(SQLiteDatabase db)
+    {
+        try {
+            FileReader fileReader = new FileReader("Data.crd");
+            BufferedReader inputFile = new BufferedReader(fileReader);
+
+            String inputLines = inputFile.readLine();
+            StringBuffer data = new StringBuffer();
+
+            while (inputLines != null)
+            {
+                data.append(inputLines + "\n");
+                inputLines = inputFile.readLine();
+            }
+
+            String sqlStr = "INSERT INTO TABLE Cards (SetCode, )"
+                    +"VALUES" +
+                    "(_id INTEGER PRIMARY KEY AUTOINCREMENT, SetCode TEXT, SetName TEXT)";
+            db.execSQL(sqlStr);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
