@@ -50,7 +50,7 @@ public class BuildDeckActivity extends AppCompatActivity {
         srlDeckHolder.addView(srlLayoutView);
 
         testDeck = dm.getTestDeck();
-        dm.db.getCards(testDeck);
+        dm.db.fillDeck(testDeck);
     }
 
     @Override

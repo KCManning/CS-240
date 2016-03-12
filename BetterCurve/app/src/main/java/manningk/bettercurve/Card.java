@@ -15,7 +15,7 @@ public class Card {
     private String m_strStatNames;
 
     public Card(String m_strSet, int m_intSetNumber, String m_strName,
-                int m_intCost, String m_strFlavor, String m_strStats, String m_strStatNames) {
+                int m_intCost, String m_strStats, String m_strStatNames, String m_strAbility, String m_strFlavor) {
         this.m_strSet = m_strSet;
         this.m_intSetNumber = m_intSetNumber;
         this.m_strName = m_strName;
@@ -23,6 +23,7 @@ public class Card {
         this.m_strFlavor = m_strFlavor;
         this.m_strStats = m_strStats;
         this.m_strStatNames = m_strStatNames;
+        this.m_strAbility = m_strAbility;
     }
 
     public String getM_strGame() {
@@ -93,8 +94,7 @@ public class Card {
     public static Card getTestCard() {
         String strStats = "7,7";
         String strStatNames = "Attack, Defense";
-        Card testCard = new Card("Fh", 001, "Goobity Gook", 4,
-                "Just BE.", strStats, strStatNames);
+        Card testCard = new Card("Fh", 001, "Goobity Gook", 4, strStats, strStatNames, "", "Just BE.");
         return testCard;
     }
 

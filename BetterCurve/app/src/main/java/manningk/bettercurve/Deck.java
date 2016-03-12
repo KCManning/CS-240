@@ -24,6 +24,7 @@ public class Deck {
     public Deck() {
         deckList = new ArrayList<>();
         quantities = new ArrayList<>();
+        deckType = "Shadow Era";
     }
 
     public void setDeckName(String name)

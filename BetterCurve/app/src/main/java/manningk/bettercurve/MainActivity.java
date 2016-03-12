@@ -17,11 +17,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    DataManager dm;
-    ArrayAdapter<String> adapter;
+    private DataManager dm;
+    private ListView lstDecks;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +33,33 @@ public class MainActivity extends AppCompatActivity {
 
         dm = DataManager.getManager(this);
         ListView lstDecks = (ListView) findViewById(R.id.lstDecks);
+
+        //lv = (ListView) findViewById(R.id.lstCards);
+
+        // Instansiating an array list (you don't need to do this,
+        // you already have yours).
+        List<String> deckList = new ArrayList<String>();
+        fillList(deckList);
+
+
+        // This is the array adapter, it takes the context of the activity as a
+        // first parameter, the type of list view as a second parameter and your
+        // array as a third parameter.
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                deckList);
+
+        lstDecks.setAdapter(arrayAdapter);
         //adapter= new ArrayAdapter<String>(this, android.R.id.lstDecks,listItems);
 
         //pollDecks();
     }
 
-    public void fillList() {
+    public void fillList(List<String> deckList) {
         int j = 0;
         for (int i = dm.getDeckCount(); i > 0; i--) {
-            adapter.add(dm.getDeck(j).getDeckName() + dm.getDeck(j).getDeckType() +
+            deckList.add(dm.getDeck(j).getDeckName() + dm.getDeck(j).getDeckType() +
                     dm.getDeck(j).getGameName());
             j++;
         }

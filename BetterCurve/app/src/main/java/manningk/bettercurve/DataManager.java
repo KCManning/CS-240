@@ -16,8 +16,9 @@ public class DataManager {
 
 
     public DataManager(Context context) {
-        decks = new ArrayList<Deck>();
+        decks = new ArrayList<>();
         db = new DataHelper(context);
+        db.getDecks(decks);
     }
 
     /**
