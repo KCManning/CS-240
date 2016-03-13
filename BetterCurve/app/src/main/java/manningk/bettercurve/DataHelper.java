@@ -165,6 +165,41 @@ public class DataHelper extends SQLiteOpenHelper {
 
     }
 
+    public synchronized boolean getCard(int id, Card c) {
+        SQLiteDatabase db = null;
+        Cursor results = null;
+
+        try {
+            db = this.getReadableDatabase();
+            results = db.rawQuery("SELECT * FROM Cards WHERE _id = " + id, null);
+            if (results.moveToFirst()) {
+
+                int nextid = (int) results.getLong(results.getColumnIndex("_id"));
+                String setCode = results.getString(results.getColumnIndex("SetCode"));
+                int cardNumber = (int) results.getLong(results.getColumnIndex("CardNumber"));
+                String cardName = results.getString(results.getColumnIndex("CardName"));
+                int cost = (int) results.getLong(results.getColumnIndex("CardCost"));
+                String statNames = results.getString(results.getColumnIndex("StatNames"));
+                String cardStats = results.getString(results.getColumnIndex("CardStats"));
+                String ability = results.getString(results.getColumnIndex("Ability"));
+                String flavor = results.getString(results.getColumnIndex("CardFlavor"));
+
+
+                c = new Card(setCode, cardNumber, cardName, cost, cardStats, statNames, ability, flavor);
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        } finally {
+            if (results != null && !results.isClosed()) {
+                results.close();
+            }
+            if (db != null && db.isOpen()) {
+                db.close();
+            }
+        }
+
+    }
 
     public synchronized boolean fillDeck(Deck d) {
 

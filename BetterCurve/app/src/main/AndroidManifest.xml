@@ -26,11 +26,6 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".DetailsScreenActivity"
-            android:label="@string/title_CardDetails"
-            android:theme="@style/AppTheme">
-        </activity>
-        <activity
             android:name=".CardListActivity"
             android:label="@string/title_CardDetails"
             android:theme="@style/AppTheme">

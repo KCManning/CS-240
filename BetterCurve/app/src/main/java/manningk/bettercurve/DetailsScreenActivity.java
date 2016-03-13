@@ -49,7 +49,7 @@ public class DetailsScreenActivity extends Fragment {
         Intent resultIntent = new Intent();
         resultIntent.putExtra(BuildDeckActivity.CARD_ID, "bil125");
 
-        //setResult(RESULT_OK, resultIntent);
+        //etResult(RESULT_OK, resultIntent);
 
         //finish();
     }

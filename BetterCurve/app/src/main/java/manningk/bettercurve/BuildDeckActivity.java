@@ -26,7 +26,6 @@ public class BuildDeckActivity extends AppCompatActivity {
     DataManager dm = new DataManager(this);
     Card testCard;
     Deck testDeck;
-    InterfaceComponents testInterface;
     LinearLayout srlLayoutView;
 
     final int MESSAGE_REQUEST = 1;
@@ -134,7 +133,7 @@ public class BuildDeckActivity extends AppCompatActivity {
         txtName.setFocusable(false);
         txtName.setOnClickListener(new ImprovedListener(testCard) {
             public void onClick(View arg0) {
-                buildCardInfo(card);
+                //buildCardInfo(card);
             }
         });
 
@@ -225,17 +224,16 @@ public class BuildDeckActivity extends AppCompatActivity {
                 testDeck.removeCard(i);
             }
     }
-*/
+
     public void buildCardInfo(Card card) {
         String passedName = "Card Details";
-        Intent intent = new Intent(this, DetailsScreenActivity.class);
+
         //intent.putExtra(passedName, card.statsToArray()); //<-Adds info to be passed into the new activity, such as deck loading.
         startActivityForResult(intent, MESSAGE_REQUEST);
     }
-
+*/
     public void buildCardInfo() {
 
-        //Intent intent = new Intent(this, DetailsScreenActivity.class);
         Intent intent = new Intent(this, CardListActivity.class);
         startActivityForResult(intent, MESSAGE_REQUEST);
     }
