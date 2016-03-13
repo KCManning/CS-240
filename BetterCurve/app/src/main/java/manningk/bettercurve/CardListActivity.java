@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Kevin on 2/11/2016.
  */
-public class CardListActivity extends FragmentActivity implements DetailsScreenActivity. {
+public class CardListActivity extends FragmentActivity {
     private ListView lv;
     private DataManager dm;
 
@@ -23,8 +23,8 @@ public class CardListActivity extends FragmentActivity implements DetailsScreenA
         setContentView(R.layout.activity_card_list_screen);
         dm = DataManager.getManager(this);
 
-        getFragmentManager().beginTransaction().add(R.id.a, new DetailsScreenActivity()).commit();
-        getFragmentManager().beginTransaction().add(R.id.fragment_container, new AddCardActivity()).commit();
+        //getFragmentManager().beginTransaction().add(R.id., new DetailsScreenActivity()).commit();
+        //getFragmentManager().beginTransaction().add(R.id.fragment_container, new AddCardActivity()).commit();
 
 
         lv = (ListView) findViewById(R.id.lstCards);

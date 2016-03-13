@@ -9,6 +9,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".CardListActivity">
 
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="manningk.bettercurve.CardsFragment"
+        android:id="@+id/fragment"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/btnFilter"
+        android:layout_alignRight="@+id/btnReturn"
+        android:layout_alignEnd="@+id/btnReturn" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,14 +40,6 @@
         android:layout_alignParentEnd="true"
         android:onClick="btnListCancelOnClick" />
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lstCards"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/btnFilter"
-        android:choiceMode="singleChoice" />
+
 
 </RelativeLayout>
