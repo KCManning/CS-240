@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class CardDetailFragment extends Fragment {
 
     private long infoID;
-    private Card card;
+    static public Card card;
 
     public CardDetailFragment() {
         // Required empty public constructor
@@ -38,9 +38,23 @@ public class CardDetailFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        View view = getView();
+        if(view != null){
+            DataManager dm = DataManager.getManager(getActivity());
+
+            dm.db.getCard((int) infoID + 1);
 
 
+            TextView txtCardName = (TextView) view.findViewById(R.id.txtCardName);
+            txtCardName.setText(card.getM_strName());
 
+            TextView txtCost = (TextView) view.findViewById(R.id.txtCost);
+            txtCost.setText(Integer.toString(card.getM_intCost()));
+
+            TextView txtCardNumber = (TextView) view.findViewById(R.id.txtCardNumber);
+            String cardNumber = card.getM_strSet() + card.getM_intSetNumber();
+            txtCardNumber.setText(cardNumber);
+        }
     }
 
     @Override
@@ -50,8 +64,6 @@ public class CardDetailFragment extends Fragment {
 
     public void setCard(long id) {
         this.infoID = id;
-
-
     }
 
 

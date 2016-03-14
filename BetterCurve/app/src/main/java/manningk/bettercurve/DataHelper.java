@@ -146,7 +146,7 @@ public class DataHelper extends SQLiteOpenHelper {
                     String statNames = results.getString(results.getColumnIndex("StatNames"));
                     String cardStats = results.getString(results.getColumnIndex("CardStats"));
                     String ability = results.getString(results.getColumnIndex("Ability"));
-                    String flavor = results.getString(results.getColumnIndex("CardFlavor"));
+                    String flavor = results.getString(results.getColumnIndex("Flavor"));
 
 
                     c = new Card(setCode, cardNumber, cardName, cost, cardStats, statNames, ability, flavor);
@@ -165,7 +165,7 @@ public class DataHelper extends SQLiteOpenHelper {
 
     }
 
-    public synchronized boolean getCard(int id, Card c) {
+    public synchronized boolean getCard(int id) {
         SQLiteDatabase db = null;
         Cursor results = null;
 
@@ -182,10 +182,12 @@ public class DataHelper extends SQLiteOpenHelper {
                 String statNames = results.getString(results.getColumnIndex("StatNames"));
                 String cardStats = results.getString(results.getColumnIndex("CardStats"));
                 String ability = results.getString(results.getColumnIndex("Ability"));
-                String flavor = results.getString(results.getColumnIndex("CardFlavor"));
+                String flavor = results.getString(results.getColumnIndex("Flavor"));
 
 
-                c = new Card(setCode, cardNumber, cardName, cost, cardStats, statNames, ability, flavor);
+                //CardDetailFragment.card = new Card(setCode, cardNumber, cardName, cost, cardStats, statNames, ability, flavor);
+                CardDetailFragment.card = new Card(setCode, cardNumber, cardName, cost, cardStats, statNames, ability, flavor);
+                CardDetailFragment.card.setM_ID(nextid);
             }
             return true;
         } catch (Exception e) {

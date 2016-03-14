@@ -1,6 +1,7 @@
 package manningk.bettercurve;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -30,10 +31,11 @@ public class CardListActivity extends FragmentActivity implements CardListFragme
         CardDetailFragment details = new CardDetailFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.listFragment, details);
-        ft.addToBackStack(null);
+        details.setCard(id);
+        //ft.addToBackStack(null);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
-        details.setCard(id);
+
     }
 
     //private DataManager dm;
@@ -66,6 +68,13 @@ public class CardListActivity extends FragmentActivity implements CardListFragme
 
 
     public void btnListCancelOnClick(View view) {
+        finish();
+    }
+    public void btnAddCardOnClick(View view){
+
+        Intent intent = this.getIntent();
+        intent.putExtra("CardID", Integer.toString(CardDetailFragment.card.getM_ID()));
+        this.setResult(RESULT_OK, intent);
         finish();
     }
 

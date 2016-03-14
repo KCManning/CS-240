@@ -48,6 +48,7 @@
         android:layout_above="@+id/btnSave"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:fillViewport="false" />
+        android:fillViewport="false"
+        android:visibility="visible" />
 
 </RelativeLayout>

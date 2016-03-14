@@ -24,12 +24,13 @@ import java.util.ArrayList;
 public class BuildDeckActivity extends AppCompatActivity {
 
     DataManager dm = new DataManager(this);
-    Card testCard;
+    Card tempCard;
     Deck testDeck;
     LinearLayout srlLayoutView;
 
     final int MESSAGE_REQUEST = 1;
-    static final String CARD_ID = "feh001";
+    static final String CARD_ID = "CardID";
+    int cardID;
 
 
     @Override
@@ -37,7 +38,7 @@ public class BuildDeckActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_build_test_screen);
-        testCard = Card.getTestCard();
+        tempCard = Card.getTestCard();
 
         srlLayoutView = new LinearLayout(this);
 
@@ -64,9 +65,6 @@ public class BuildDeckActivity extends AppCompatActivity {
         srlLayoutView.removeAllViews();
 
         for (int i = 0; i < testDeck.getDeckList().size(); i++) {
-            if(testDeck.getQty(i) == 0)
-                addRow();
-            else
                 addRow(testDeck.getCard(i), testDeck.getQty(i));
         }
         testDeck.emptyDeck();
@@ -90,7 +88,7 @@ public class BuildDeckActivity extends AppCompatActivity {
                         350, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 
         EditText txtName = new EditText(this);
-        txtName.setText(testCard.getM_strName());
+        txtName.setText(tempCard.getM_strName());
         txtName.setLayoutParams(txtLayoutParams);
         txtName.setFocusable(false);
         txtName.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +129,7 @@ public class BuildDeckActivity extends AppCompatActivity {
         txtName.setText(card.getM_strName());
         txtName.setLayoutParams(txtLayoutParams);
         txtName.setFocusable(false);
-        txtName.setOnClickListener(new ImprovedListener(testCard) {
+        txtName.setOnClickListener(new ImprovedListener(tempCard) {
             public void onClick(View arg0) {
                 //buildCardInfo(card);
             }
@@ -139,13 +137,13 @@ public class BuildDeckActivity extends AppCompatActivity {
 
         //EditText txtCost = (EditText) findViewById(R.id.txtCost);
         EditText txtCost = new EditText(this);
-        txtCost.setText(String.valueOf(card.getM_intCost()));
+        txtCost.setText(Integer.toString(card.getM_intCost()));
         txtCost.setLayoutParams(smallLayoutParams);
         txtCost.setFocusable(false);
 
         //EditText txtQty = (EditText) findViewById(R.id.txtQty);
         EditText txtQty = new EditText(this);
-        txtQty.setText(String.valueOf(qty));
+        txtQty.setText(Integer.toString(qty));
         txtQty.setLayoutParams(smallLayoutParams);
         txtQty.setFocusable(false);
 
@@ -189,11 +187,12 @@ public class BuildDeckActivity extends AppCompatActivity {
         grpLayoutView.addView(btnLower);
 
         srlLayoutView.addView(grpLayoutView);
+        srlLayoutView.setVisibility(View.VISIBLE);
 
     }
 
     public void btnAddCardOnClick(View view) {
-        addRow();
+        buildCardInfo();
     }
 
     public void btnSaveDeckOnClick(View view) {
@@ -212,7 +211,7 @@ public class BuildDeckActivity extends AppCompatActivity {
 
         for (int i = 0; i < arrAllCardData.size(); i += 11) {
             EditText qty = (EditText) arrAllCardData.get(i + 6);
-            testDeck.addCard(testCard.getTestCard(), Integer.parseInt(qty.getText().toString()));
+            testDeck.addCard(tempCard.getTestCard(), Integer.parseInt(qty.getText().toString()));
         }
 
     }
@@ -265,7 +264,13 @@ public class BuildDeckActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == MESSAGE_REQUEST && resultCode == RESULT_OK)
         {
-            String message = (String) data.getStringExtra(CARD_ID);
+            cardID = Integer.parseInt((String) data.getStringExtra(CARD_ID));
+            if(cardID == CardDetailFragment.card.getM_ID())
+            {
+                //tempCard = CardDetailFragment.card;
+                addRow();
+                addRow(CardDetailFragment.card, 1);
+            }
 
         }
     }

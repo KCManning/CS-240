@@ -5,6 +5,7 @@ package manningk.bettercurve;
  */
 public class Card {
     private String m_strGame;
+    private int m_ID;
     private String m_strSet;
     private int m_intSetNumber;
     private String m_strName;
@@ -24,6 +25,14 @@ public class Card {
         this.m_strStats = m_strStats;
         this.m_strStatNames = m_strStatNames;
         this.m_strAbility = m_strAbility;
+    }
+
+    public int getM_ID() {
+        return m_ID;
+    }
+
+    public void setM_ID(int m_ID) {
+        this.m_ID = m_ID;
     }
 
     public String getM_strGame() {
