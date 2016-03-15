@@ -32,7 +32,7 @@ public class CardDetailFragment extends Fragment {
 
 
 
-        return inflater.inflate(R.layout.fragment_cards, container, false);
+        return inflater.inflate(R.layout.details_fragment, container, false);
     }
 
     @Override

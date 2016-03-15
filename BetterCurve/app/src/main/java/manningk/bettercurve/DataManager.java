@@ -13,6 +13,7 @@ public class DataManager {
     private static DataManager dm;
     public DataHelper db;
     private Context context;
+    public int deckID;
 
 
     public DataManager(Context context) {
@@ -47,8 +48,34 @@ public class DataManager {
     }
 
     public String getDeckName(int id) {
-        Deck deck = getDeck(id);
-        return deck.getDeckName();
+        if(id == -1)
+            return null;
+        else {
+            Deck deck = getDeck(id);
+            return deck.getDeckName();
+        }
     }
+
+    public void addDeck(Deck d)
+    {
+        decks.add(d);
+    }
+    public void addCardToDeck(int id, Card c, int qty)
+    {
+        Deck tempDeck = decks.get(id);
+        tempDeck.addCard(c, qty);
+        decks.set(id, tempDeck);
+    }
+
+    public void setDeckName(int id, String name)
+    {
+        Deck tempDeck = decks.get(id);
+        tempDeck.setDeckName(name);
+        decks.set(id, tempDeck);
+    }
+ public void backupDecks()
+ {
+     db.backupDecks(decks);
+ }
 
 }

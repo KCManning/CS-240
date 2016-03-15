@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
 
         dm = DataManager.getManager(this);
+        dm.deckID = -1;
         ListView lstDecks = (ListView) findViewById(R.id.lstDecks);
 
         //lv = (ListView) findViewById(R.id.lstCards);

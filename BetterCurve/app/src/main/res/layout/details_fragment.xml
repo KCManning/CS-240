@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Name: "
+        android:id="@+id/lblName"
+        android:layout_gravity="center_vertical" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Cost:"
+        android:id="@+id/lblCost"
+        android:layout_gravity="center_vertical"
+        android:layout_below="@+id/lblName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Card Number:"
+        android:id="@+id/lblCardNumber"
+        android:layout_gravity="center_vertical"
+        android:layout_below="@+id/lblCost"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/txtCardNumber"
+        android:layout_gravity="center_vertical"
+        android:layout_alignTop="@+id/lblCardNumber"
+        android:layout_toRightOf="@+id/lblCardNumber"
+        android:layout_alignRight="@+id/txtCost"
+        android:layout_alignEnd="@+id/txtCost" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/txtCost"
+        android:layout_gravity="center_vertical"
+        android:layout_above="@+id/lblCardNumber"
+        android:layout_toRightOf="@+id/lblCost"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lstStats"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lblCardNumber"
+        android:layout_above="@+id/btnAdd" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/txtCardName"
+        android:layout_gravity="center_vertical"
+       android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/txtCardNumber"
+        android:layout_alignEnd="@+id/txtCardNumber"
+        android:layout_toRightOf="@+id/lblName"
+        android:layout_toEndOf="@+id/lblName" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Card"
+        android:id="@+id/btnAdd"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:enabled="true"
+        android:onClick="btnAddCardOnClick" />
+
+</RelativeLayout>

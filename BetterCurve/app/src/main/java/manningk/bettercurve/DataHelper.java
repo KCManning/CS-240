@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,18 +139,18 @@ public class DataHelper extends SQLiteOpenHelper {
             results = db.rawQuery("SELECT * FROM Cards WHERE CardName = " + name, null);
             if (results.moveToFirst()) {
 
-                    int id = (int) results.getLong(results.getColumnIndex("_id"));
-                    String setCode = results.getString(results.getColumnIndex("SetCode"));
-                    int cardNumber = (int) results.getLong(results.getColumnIndex("CardNumber"));
-                    String cardName = results.getString(results.getColumnIndex("CardName"));
-                    int cost = (int) results.getLong(results.getColumnIndex("CardCost"));
-                    String statNames = results.getString(results.getColumnIndex("StatNames"));
-                    String cardStats = results.getString(results.getColumnIndex("CardStats"));
-                    String ability = results.getString(results.getColumnIndex("Ability"));
-                    String flavor = results.getString(results.getColumnIndex("Flavor"));
+                int id = (int) results.getLong(results.getColumnIndex("_id"));
+                String setCode = results.getString(results.getColumnIndex("SetCode"));
+                int cardNumber = (int) results.getLong(results.getColumnIndex("CardNumber"));
+                String cardName = results.getString(results.getColumnIndex("CardName"));
+                int cost = (int) results.getLong(results.getColumnIndex("CardCost"));
+                String statNames = results.getString(results.getColumnIndex("StatNames"));
+                String cardStats = results.getString(results.getColumnIndex("CardStats"));
+                String ability = results.getString(results.getColumnIndex("Ability"));
+                String flavor = results.getString(results.getColumnIndex("Flavor"));
 
 
-                    c = new Card(setCode, cardNumber, cardName, cost, cardStats, statNames, ability, flavor);
+                c = new Card(setCode, cardNumber, cardName, cost, cardStats, statNames, ability, flavor);
             }
             return true;
         } catch (Exception e) {
@@ -332,4 +333,40 @@ public class DataHelper extends SQLiteOpenHelper {
 
         return empty;
     }
+
+    public synchronized boolean backupDecks(ArrayList<Deck> decks) {
+        SQLiteDatabase db = null;
+        Cursor deckResults = null;
+        Cursor idResults = null;
+        Cursor cardResults = null;
+        String sqlStr;
+        try {
+            db = this.getReadableDatabase();
+            for (int i = 0; i < decks.size(); i++) {
+                Deck temp = decks.get(i);
+                deckResults = db.rawQuery("SELECT _id FROM Decks WHERE DeckName = \"" + temp.getDeckName() + "\"", null);
+                if (deckResults.getCount() < 1) {
+                    db.execSQL("INSERT INTO Decks (DeckName) VALUES (\"" + temp.getDeckName() + "\")");
+                    deckResults = db.rawQuery("SELECT _id FROM Decks WHERE DeckName = \"" + temp.getDeckName()+"\"", null);
+                }
+                int deckID = (int) deckResults.getLong(deckResults.getColumnIndex("_id"));
+                for (int j = 0; j < temp.uniques(); j++) {
+                    cardResults = db.rawQuery("SELECT _id FROM Cards WHERE CardName = \"" + temp.getCard(j).getM_strName()+"\"", null);
+                    int cardID = (int) cardResults.getLong(cardResults.getColumnIndex("_id"));
+                    sqlStr = "INSERT INTO DeckCards (DeckID, CardID, Quantity) VALUES (" + deckID +
+                            "," + cardID + "," + temp.getQty(j) + ")";
+                    db.execSQL(sqlStr);
+                }
+
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
 }

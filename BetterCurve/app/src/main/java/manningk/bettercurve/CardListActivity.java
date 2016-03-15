@@ -21,8 +21,8 @@ public class CardListActivity extends FragmentActivity implements CardListFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_list_screen);
-        getFragmentManager().beginTransaction().add(R.id.listFragment, new CardListFragment()).commit();
-        getFragmentManager().beginTransaction().add(R.id.detailsFragment, new CardDetailFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.detailsFragment, new CardListFragment()).addToBackStack(null).commit();
+        //getFragmentManager().beginTransaction().addToBackStack(null).commit();
     }
 
 
@@ -30,9 +30,9 @@ public class CardListActivity extends FragmentActivity implements CardListFragme
     public void itemClicked(long id) {
         CardDetailFragment details = new CardDetailFragment();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.listFragment, details);
+        ft.replace(R.id.detailsFragment, details);
         details.setCard(id);
-        //ft.addToBackStack(null);
+        ft.addToBackStack(null);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
 

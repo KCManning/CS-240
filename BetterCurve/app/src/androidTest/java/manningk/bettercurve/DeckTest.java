@@ -14,7 +14,7 @@ public class DeckTest extends AndroidTestCase {
 
     public void setUp() throws Exception {
         super.setUp();
-        d = Deck.getDeck();
+        d = Deck.getDeck(getContext());
     }
 
     public void testGetDeckList() throws Exception {
@@ -44,8 +44,8 @@ public class DeckTest extends AndroidTestCase {
         int size1 = d.getDeckList().size();
         int intStats[] = {3, 5};
         String strStatNames[] = {"Defense", "Durability"};
-        Card card = new Card("Make Believe", "Fh", 002, "False Defense", 7, "Please Work",
-                "I AM.", intStats, strStatNames);
+        /*Card card = new Card("Make Believe", "Fh", 002, "False Defense", 7, "Please Work",
+                "I AM.", intStats, strStatNames);*/
         int size2 = d.getDeckList().size();
         assertTrue("addCard failed", size2 - size1 == 1);
     }

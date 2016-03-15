@@ -1,11 +1,14 @@
 package manningk.bettercurve;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +26,7 @@ import java.util.ArrayList;
  */
 public class BuildDeckActivity extends AppCompatActivity {
 
-    DataManager dm = new DataManager(this);
+    DataManager dm;
     Card tempCard;
     Deck testDeck;
     LinearLayout srlLayoutView;
@@ -32,10 +35,11 @@ public class BuildDeckActivity extends AppCompatActivity {
     static final String CARD_ID = "CardID";
     int cardID;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        dm = DataManager.getManager(this);
 
         setContentView(R.layout.activity_build_test_screen);
         tempCard = Card.getTestCard();
@@ -51,6 +55,7 @@ public class BuildDeckActivity extends AppCompatActivity {
 
         testDeck = dm.getTestDeck();
         dm.db.fillDeck(testDeck);
+
     }
 
     @Override
@@ -65,21 +70,22 @@ public class BuildDeckActivity extends AppCompatActivity {
         srlLayoutView.removeAllViews();
 
         for (int i = 0; i < testDeck.getDeckList().size(); i++) {
-                addRow(testDeck.getCard(i), testDeck.getQty(i));
+            addRow(testDeck.getCard(i), testDeck.getQty(i));
         }
-        testDeck.emptyDeck();
+        //testDeck.emptyDeck();
         //clearDeck();
     }
 
     public void btnCancelOnClick(View view) {
-        testDeck.emptyDeck();
+        if (dm.deckID == -1)
+            testDeck.emptyDeck();
         //clearDeck();
         finish();
     }
 
     public void addRow() {
         //define and create a linear layout
-        LinearLayout grpLayoutView = new LinearLayout(this);
+        LinearLayout grpLayoutView = new LinearLayout(getApplicationContext());
         grpLayoutView.setOrientation(LinearLayout.HORIZONTAL);
         grpLayoutView.setGravity(Gravity.TOP | Gravity.LEFT);
 
@@ -87,23 +93,24 @@ public class BuildDeckActivity extends AppCompatActivity {
                 new LinearLayout.LayoutParams(
                         350, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        EditText txtName = new EditText(this);
+        EditText txtName = new EditText(getApplicationContext());
         txtName.setText(tempCard.getM_strName());
         txtName.setLayoutParams(txtLayoutParams);
         txtName.setFocusable(false);
         txtName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
-                buildCardInfo(); }});
+                buildCardInfo();
+            }
+        });
 
-        EditText txtCost = new EditText(this);
+        EditText txtCost = new EditText(getApplicationContext());
         txtCost.setVisibility(View.INVISIBLE);
-        EditText txtQty = new EditText(this);
+        EditText txtQty = new EditText(getApplicationContext());
         txtQty.setText("0");
         txtQty.setVisibility(View.INVISIBLE);
-        Button btnRaise = new Button(this);
+        Button btnRaise = new Button(getApplicationContext());
         btnRaise.setVisibility(View.INVISIBLE);
-        Button btnLower = new Button(this);
-        btnLower.setVisibility(View.INVISIBLE);
+        Button btnLower = new Button(getApplicationContext());
 
         grpLayoutView.addView(txtName);
         grpLayoutView.addView(txtCost);
@@ -117,10 +124,10 @@ public class BuildDeckActivity extends AppCompatActivity {
     public void addRow(Card card, int qty) {
         android.widget.LinearLayout.LayoutParams txtLayoutParams =
                 new LinearLayout.LayoutParams(
-                        350,
+                        700,
                         android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
         android.widget.LinearLayout.LayoutParams smallLayoutParams =
-                new LinearLayout.LayoutParams(90,
+                new LinearLayout.LayoutParams(180,
                         android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 
 
@@ -187,18 +194,23 @@ public class BuildDeckActivity extends AppCompatActivity {
         grpLayoutView.addView(btnLower);
 
         srlLayoutView.addView(grpLayoutView);
-        srlLayoutView.setVisibility(View.VISIBLE);
 
     }
 
     public void btnAddCardOnClick(View view) {
+        // addRow(tempCard, 2);
         buildCardInfo();
     }
 
     public void btnSaveDeckOnClick(View view) {
+
         testDeck.emptyDeck();
         //clearDeck();
+
         saveDeck();
+        if (dm.getDeckName(dm.deckID) == null)
+            newName();
+
     }
 
     public void saveDeck() {
@@ -210,8 +222,18 @@ public class BuildDeckActivity extends AppCompatActivity {
         int intQty[] = new int[arrAllCardData.size() / 11];
 
         for (int i = 0; i < arrAllCardData.size(); i += 11) {
+            EditText name = (EditText) arrAllCardData.get(i + 2);
             EditText qty = (EditText) arrAllCardData.get(i + 6);
-            testDeck.addCard(tempCard.getTestCard(), Integer.parseInt(qty.getText().toString()));
+            dm.db.getCard(tempCard, name.getText().toString());
+            if (dm.deckID == -1) {
+
+                testDeck.addCard(tempCard, Integer.parseInt(qty.getText().toString()));
+                if (i >= arrAllCardData.size() - 11)
+                    dm.addDeck(testDeck);
+                dm.deckID = dm.getDeckCount() - 1;
+            } else
+                dm.addCardToDeck(dm.deckID, tempCard, Integer.parseInt(qty.getText().toString()));
+
         }
 
     }
@@ -261,18 +283,48 @@ public class BuildDeckActivity extends AppCompatActivity {
         return result;
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == MESSAGE_REQUEST && resultCode == RESULT_OK)
-        {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MESSAGE_REQUEST && resultCode == RESULT_OK) {
             cardID = Integer.parseInt((String) data.getStringExtra(CARD_ID));
-            if(cardID == CardDetailFragment.card.getM_ID())
-            {
-                //tempCard = CardDetailFragment.card;
-                addRow();
-                addRow(CardDetailFragment.card, 1);
+            if (cardID == CardDetailFragment.card.getM_ID()) {
+                tempCard = CardDetailFragment.card;
+                testDeck.addCard(tempCard);
             }
 
         }
     }
+
+
+    private void newName() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Title");
+
+        // Set up the input
+        final EditText input = new EditText(this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+// Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String name = input.getText().toString();
+                dm.setDeckName(dm.deckID, name);
+                dm.backupDecks();
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+
+        });
+
+        builder.show();
+    }
+
 
 }
